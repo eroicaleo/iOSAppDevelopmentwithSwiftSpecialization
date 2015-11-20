@@ -70,3 +70,40 @@ inspector. Or we could do it with the following code.
 ```swift
 imageToggle.setTitle("show previous image", forState: .Selected)
 ```
+
+# Week 3 UIKit and the Interface Builder
+
+## Beginning Auto Layout
+
+To scale the simulator: select 'window' -> 'scale' -> '33%'.
+To select another device: select 'hardware' -> 'device' -> 'iphone'
+
+We can see the size and origin of the image by clicking 'show the size inspector'
+at the right panel.
+
+If we want to adjust the location of the button, click it and at the right bottom,
+find the 'pin'. Then we can select the top/left/bottom/right constraint. After we
+adding them, in the `ViewController` tree, the constraints will show up. You can also
+find it at the right panel.
+
+We can also add constraint for the button like `height`.
+
+Then we could fix the constraints issue by clicking the warnings and then
+`fix the misplacement`.
+
+**Very important**: remember to uncheck the *constrain to margins*. Otherwise
+your image cannot fill out the screen. Can refer to stackoverflow article
+[here](http://stackoverflow.com/questions/25807545/what-is-constrain-to-margin-in-storyboard-in-xcode-6)
+
+## In-Depth Auto Layout
+
+* To delete some constraints:
+	* click the object, e.g. bottom or image
+	* go to right panel, click the ruler shape icon at the top, 'show the size inspector'
+	* scroll down, there is a section for 'constraints'
+* Container view is convenient when have 5 buttons at the bottom.
+	* right panel, in 'filter', type `uiview`
+* Let the contents, e.g. the button, of the view decides the height.
+	* Just set the constraints as last section, but this time, only left/top/bottom and height.
+	* Fix the view: left panel, click warnings, click `view`,
+	  check `apply to all views in the container`, click `fix misplacement`
