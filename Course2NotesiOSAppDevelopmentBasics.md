@@ -5,6 +5,9 @@
 	- [Running Code in an App](#running-code-in-an-app)
 	- [Creating Interfaces](#creating-interfaces)
 	- [Using Buttons](#using-buttons)
+- [Week 3 UIKit and the Interface Builder](#week-3-uikit-and-the-interface-builder)
+	- [Beginning Auto Layout](#beginning-auto-layout)
+	- [In-Depth Auto Layout](#in-depth-auto-layout)
 <!-- /TOC -->
 
 # Week 2 Further Introduction to XCode
@@ -107,3 +110,38 @@ your image cannot fill out the screen. Can refer to stackoverflow article
 	* Just set the constraints as last section, but this time, only left/top/bottom and height.
 	* Fix the view: left panel, click warnings, click `view`,
 	  check `apply to all views in the container`, click `fix misplacement`
+* Make 4 buttons:
+	* `ctrl-c` `ctrl-v` 3 times
+	* set the top/bottom space to be 0
+* Now adjust the space between the 4 bottoms
+	* `ctrl+click` the left most buttom and drag to the buttom next to it
+	* Then select `horizontal spacing`, set it to 0
+	* right most botton, select `trailing space to container`, set it to 0.
+	* To make them equal width, `ctrl+click` and select `equal width`
+	* Then just `fix misplacement`
+
+## Basic UI Elements
+
+* Other UI elements
+	* click `main.storyboard`, then right panel.
+* `Label` and `Button` are sub class of UI View.
+* `Button` has control
+	* Alignment in enabled/selected/Highlighted.
+* `Segmented Control`: iOS version of radio button.
+	* How many segments
+* `Text Field`:
+	* Can use `Placeholder`.
+* `Slider`
+* `Switch`
+* `Activity Indicator View`:
+	* `Animating`
+	* `Hides when Stopped`
+* `Image View`
+* `Text View`
+	* subclass of scope
+* `Scroll View`
+* `Visual Effect with Blur`
+
+## UIStackView
+
+Make the 4 buttons super easy.
