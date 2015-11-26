@@ -145,3 +145,14 @@ your image cannot fill out the screen. Can refer to stackoverflow article
 ## UIStackView
 
 Make the 4 buttons super easy.
+
+* select all 4 the buttons we created, then press the leftmost of the 4 icons in
+  the left bottom corner of `View Controller Scene`.
+* Click `Stack View` in the left pane and then `attribute inspector`.
+* Most important part is `Alignment` and `Distribution`, which we use `Fill equally`.
+	* `Fill equally`: what we want.
+	* `Equal spacing`: The space between buttons are the same.
+	* `Equal center`: The center of each button are distributed.
+* We can add `Image View` and new `Buttom` in, and they are still equally filled.
+* We can stack one step further by stacking the image and the 4 buttons together.
+* We can also a top bar and delete them. 
