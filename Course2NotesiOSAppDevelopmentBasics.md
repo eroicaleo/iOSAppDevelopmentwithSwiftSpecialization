@@ -8,6 +8,8 @@
 - [Week 3 UIKit and the Interface Builder](#week-3-uikit-and-the-interface-builder)
 	- [Beginning Auto Layout](#beginning-auto-layout)
 	- [In-Depth Auto Layout](#in-depth-auto-layout)
+	- [Basic UI Elements](#basic-ui-elements)
+	- [UIStackView](#uistackview)
 <!-- /TOC -->
 
 # Week 2 Further Introduction to XCode
@@ -91,8 +93,17 @@ find it at the right panel.
 
 We can also add constraint for the button like `height`.
 
-Then we could fix the constraints issue by clicking the warnings and then
-`fix the misplacement`.
+Two ways to auto fix the constraints issue:
+
+* At the left pane scene, right to the `View Controller Scene`, click the yellow
+  or red arrow. Then we could fix the constraints issue by clicking the warnings
+  and then `fix the misplacement`.
+* At the right bottom of `ViewController`, click `Resolve Auto Layout Issues`.
+
+Put a UI Element at the center of the `ViewController`:
+
+* click the element, go to right pane, `Show the Size Inspector`.
+* `Arrange`, selects `Center horizontal/Vertical`.
 
 **Very important**: remember to uncheck the *constrain to margins*. Otherwise
 your image cannot fill out the screen. Can refer to stackoverflow article
@@ -155,4 +166,4 @@ Make the 4 buttons super easy.
 	* `Equal center`: The center of each button are distributed.
 * We can add `Image View` and new `Buttom` in, and they are still equally filled.
 * We can stack one step further by stacking the image and the 4 buttons together.
-* We can also a top bar and delete them. 
+* We can also a top bar and delete them.
