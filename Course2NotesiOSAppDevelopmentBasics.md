@@ -10,6 +10,8 @@
 	- [In-Depth Auto Layout](#in-depth-auto-layout)
 	- [Basic UI Elements](#basic-ui-elements)
 	- [UIStackView](#uistackview)
+- [Week 4 Advanced UI Concepts](#week-4-advanced-ui-concepts)
+	- [Modifying the View Hierarchy in Code](#modifying-the-view-hierarchy-in-code)
 <!-- /TOC -->
 
 # Week 2 Further Introduction to XCode
@@ -158,7 +160,7 @@ your image cannot fill out the screen. Can refer to stackoverflow article
 Make the 4 buttons super easy.
 
 * select all 4 the buttons we created, then press the leftmost of the 4 icons in
-  the left bottom corner of `View Controller Scene`.
+  the right bottom corner of `View Controller Scene`.
 * Click `Stack View` in the left pane and then `attribute inspector`.
 * Most important part is `Alignment` and `Distribution`, which we use `Fill equally`.
 	* `Fill equally`: what we want.
@@ -167,3 +169,81 @@ Make the 4 buttons super easy.
 * We can add `Image View` and new `Buttom` in, and they are still equally filled.
 * We can stack one step further by stacking the image and the 4 buttons together.
 * We can also a top bar and delete them.
+
+# Week 4 Advanced UI Concepts
+
+## Modifying the View Hierarchy in Code
+
+We are going to make a pop up menu when we press `Filter`. The stack view doesn't
+make sense, because it will top image view become smaller. Secondary view will
+overlay.
+
+* We move the `ImageView` and the `View` of 4 buttons out of the vertical stack view.
+* Added the top/left/right/bottom constraints for button view and top/left/right
+  constraints for image view. Then auto fix the constraint issue.
+* Delete the behavior by right clicking the button like `Share` or `Compare`,
+  click the cross to remove the function associated with the button.
+* Add a `View` outside the `View Controller`
+	* First search 'uiview' in the search bar of object library, and drag it to
+	  the `View Controller`.
+	* Then drag it outside the `View Controller` in the left pane.
+* Add a `Horizontal Stack View` to the new `View`, set the top/left/right/bottom constraints,
+  fix the constraints problem by using the bottom right icon `Resolve Auto Layout Issues`.
+  Set the `Distribution` to `Fill equally`.
+* Add 5 buttons to the `Stack View`.
+* Delete the code for the `Button` and the code inside `viewDidLoad`.
+* Hold `alt` and click the `Main.Storyboard` to bring up the Storyboard in
+  Secondary view.
+* `ctrl+click` to bring outlet of secondary menu, filter button and bottom menu
+  to the code. Like we did in last lecture.
+* Also add an action for `filter` button, with the following code:
+
+```swift
+view.addSubview(secondaryMenu)
+```
+
+* Make sure the following [here](http://stackoverflow.com/questions/26442414/libcabi-dylib-terminating-with-uncaught-exception-of-type-nsexception-lldb),
+go to Main.storyboard, RIGHT click on the yellow
+box icon (view controller) at the top of the phone outline and DELETE the
+outlet(s) with yellow flags.
+
+* The final code looks like this:
+
+```swift
+override func viewDidLoad() {
+	super.viewDidLoad()
+	// Do any additional setup after loading the view, typically from a nib.
+	secondaryMenu.translatesAutoresizingMaskIntoConstraints = false
+	secondaryMenu.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+
+}
+
+@IBAction func onFilter(sender: UIButton) {
+	if (sender.selected) {
+		hideSecondaryMenu()
+		sender.selected = false
+	} else {
+		showSecondaryMenu()
+		sender.selected = true
+	}
+}
+
+func showSecondaryMenu() {
+	view.addSubview(secondaryMenu)
+
+	let bottomConstraint = secondaryMenu.bottomAnchor.constraintEqualToAnchor(bottomMenu.topAnchor)
+	let leftConstraint = secondaryMenu.leftAnchor.constraintEqualToAnchor(view.leftAnchor)
+	let rightConstraint = secondaryMenu.rightAnchor.constraintEqualToAnchor(view.rightAnchor)
+
+	let heightConstraint = secondaryMenu.heightAnchor.constraintEqualToConstant(44)
+
+	NSLayoutConstraint.activateConstraints([bottomConstraint, leftConstraint, rightConstraint, heightConstraint])
+
+	view.layoutIfNeeded()
+
+}
+
+func hideSecondaryMenu() {
+	secondaryMenu.removeFromSuperview()
+}
+```
