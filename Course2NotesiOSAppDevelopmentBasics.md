@@ -284,3 +284,35 @@ func hideSecondaryMenu() {
 ```
 
 **Here I don't understand what the completed does**
+
+## Tableviews and The Delegate Pattern
+
+Ideas of Delegate Pattern:
+Allows iOS to do is have a system
+component, such as a table view, which only handles laying
+out elements in a table. It doesn't need to know
+what its laying out and it doesn't need to do if
+say a row is pressed. It delegates those out to some other
+object which will be something in your hands, in your control. In this case, the view controller,
+the table view, and the view controller will do all that. It will provide the content and
+will perform any actions and update the UI in any way it
+should when actions occur.
+
+* Drag a `Table View` into a new `ViewController`
+	* constrain to to top/bottom/left/right to 0.
+* Create a new file: new -> Cocoa Touch Class -> subclass of UIViewController ->
+  Name it 'TableViewController'
+* Click the yellow `View Controller` we just created, click the `Show the identity inspector`
+  at the top of the right pane. Change the class to `TableViewController`.
+* `Ctrl+Drag` the `Table View` to the `TableViewController` class.
+* Click `Table View`, then click `Attributor Inspector`, change the prototype cell
+  to 1.
+* Click `Table View Cell`, click `Attributor Inspector`, change the `style` to
+  `Basic`.
+* Click `Title` under `Content View` under `Table View Cell`, change the `Title`
+  to `Filter Name`.
+* Go back to our `TableViewController` class, make it conform the protocol `UITableViewDataSource`.
+* Add the following code: see the code.
+* Right click the `Table View`, drag the datasource to `TableViewController`.
+* Click the `TableViewController`, check the `is Initial View Controller` mark.
+* Make the `TableViewController` class conform the `UITableViewDelegate` protocol.
