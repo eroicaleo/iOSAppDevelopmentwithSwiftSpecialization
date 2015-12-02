@@ -247,3 +247,40 @@ func hideSecondaryMenu() {
 	secondaryMenu.removeFromSuperview()
 }
 ```
+
+## Basic Animations
+
+We can add some animations in the showSecondaryMenu and hideSecondaryMenu function.
+
+```swift
+func showSecondaryMenu() {
+	view.addSubview(secondaryMenu)
+
+	let bottomConstraint = secondaryMenu.bottomAnchor.constraintEqualToAnchor(bottomMenu.topAnchor)
+	let leftConstraint = secondaryMenu.leftAnchor.constraintEqualToAnchor(view.leftAnchor)
+	let rightConstraint = secondaryMenu.rightAnchor.constraintEqualToAnchor(view.rightAnchor)
+
+	let heightConstraint = secondaryMenu.heightAnchor.constraintEqualToConstant(44)
+
+	NSLayoutConstraint.activateConstraints([bottomConstraint, leftConstraint, rightConstraint, heightConstraint])
+
+	view.layoutIfNeeded()
+
+	self.secondaryMenu.alpha = 0
+	UIView.animateWithDuration(0.5, animations: {
+		self.secondaryMenu.alpha = 1.0
+	})
+}
+
+func hideSecondaryMenu() {
+	UIView.animateWithDuration(0.4, animations: {
+		self.secondaryMenu.alpha = 0
+		}, completion: { completed in
+			if completed == true {
+				self.secondaryMenu.removeFromSuperview()
+			}
+	})
+}
+```
+
+**Here I don't understand what the completed does**
