@@ -316,3 +316,60 @@ should when actions occur.
 * Right click the `Table View`, drag the datasource to `TableViewController`.
 * Click the `TableViewController`, check the `is Initial View Controller` mark.
 * Make the `TableViewController` class conform the `UITableViewDelegate` protocol.
+
+## Action Sheet, Image Picker and Activity Controller
+
+* `Ctrl+Drag` new photo button to the `ViewController` class and make an action
+  call it `onNewPhoto`.
+* Then Added code like following
+```swift
+@IBAction func onShare(sender: AnyObject) {
+	let activityController = UIActivityViewController(activityItems: [imageView.image!], applicationActivities: nil)
+
+	presentViewController(activityController, animated: true, completion: nil)
+}
+
+@IBAction func onNewPhoto(sender: AnyObject) {
+	let actionSheet = UIAlertController(title: "New Photo", message: nil, preferredStyle: .ActionSheet)
+
+	actionSheet.addAction(UIAlertAction(title: "Camera", style: .Default, handler: { action in
+		self.showCamera()
+	}))
+
+	actionSheet.addAction(UIAlertAction(title: "Album", style: .Default, handler: { action in
+		self.showAlbum()
+	}))
+
+	actionSheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+
+	self.presentViewController(actionSheet, animated: true, completion: nil)
+}
+
+func showCamera() {
+	let cameraPicker = UIImagePickerController()
+	cameraPicker.delegate = self
+	cameraPicker.sourceType = .Camera
+
+	presentViewController(cameraPicker, animated: true, completion: nil)
+}
+
+func showAlbum() {
+	let cameraPicker = UIImagePickerController()
+	cameraPicker.delegate = self
+	cameraPicker.sourceType = .PhotoLibrary
+
+	presentViewController(cameraPicker, animated: true, completion: nil)
+
+}
+
+func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+	dismissViewControllerAnimated(true, completion: nil)
+	if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+		imageView.image = image
+	}
+}
+
+func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+	dismissViewControllerAnimated(true, completion: nil)
+}
+```
